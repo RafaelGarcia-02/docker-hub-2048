@@ -1,0 +1,6 @@
+services:
+  app-juego:
+    image: rafaelgs522/nginx-2048:latest 
+    ports:
+      - "80:80"
+    restart: always
