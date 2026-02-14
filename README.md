@@ -36,3 +36,40 @@ You can find the same information in the [contributing guide.](https://github.co
 
 ## Donations
 I made this in my spare time, and it's hosted on GitHub (which means I don't have any hosting costs), but if you enjoyed the game and feel like buying me coffee, you can donate at my BTC address: `1Ec6onfsQmoP9kkL3zkpB6c5sA4PVcXU2i`. Thank you very much!
+
+
+# Ampliacion Rafael Pablo Garcia Sanchez
+# # Despliegue de Juego 2048 con Docker y AWS
+
+Este proyecto consiste en la "dockerización" de una aplicación web estática (el juego 2048) y su posterior despliegue en una instancia EC2 de Amazon Web Services (AWS) utilizando Docker Compose.
+
+## 🚀 Pasos realizados
+
+### 1. Creación del Dockerfile
+Se ha creado un archivo `Dockerfile` basado en la imagen de `nginx` para servir el contenido estático. El proceso incluye:
+* Instalación de `git`.
+* Clonación del repositorio del juego.
+* Copia de los archivos al directorio por defecto de Nginx (`/usr/share/nginx/html`).
+![alt text](<2048-doc/1-creacion dockerfile.png>)
+
+### 2. Construcción y Publicación
+La imagen fue construida localmente y subida a **Docker Hub**:
+1. `docker build -t nginx-2048 .`
+2. `docker tag nginx-2048 tu_usuario/nginx-2048:latest`
+3. `docker push tu_usuario/nginx-2048:latest`
+![alt text](<2048-doc/2-levantando dockerfile.png>)
+![alt text](<2048-doc/3-subir imagen a docker hub.png>)
+![alt text](<2048-doc/4-imagen subida .png>)
+
+### 3. Infraestructura en AWS
+Se ha desplegado una instancia **EC2 (Ubuntu)** en AWS con la siguiente configuración de red (Security Group):
+* **Puerto 22 (SSH):** Para administración remota.
+* **Puerto 80 (HTTP):** Para permitir el acceso web público.
+
+### 4. Despliegue con Docker Compose
+Una vez dentro de la instancia de AWS, se utilizó un archivo `docker-compose.yml` para gestionar el contenedor:
+
+![alt text](<2048-doc/5-creacion compose.png>)
+
+### 5. Funcionamiento del juego 2048
+![alt text](2048-doc/6-funcionando.png)
